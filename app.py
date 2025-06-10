@@ -191,7 +191,7 @@ with st.expander("Fake X/IG profile detection"):
     st.warning("The Instagram profile detector is trained on a small dataset (60 samples) with limited variety. Predictions may not be fully accurate yet.")
 
     model_type = st.selectbox("Option", ["Detect X profile", "Detect Instagram profile"])
-    uploaded_image = st.file_uploader("Or upload your own screenshot", type=["jpg", "jpeg", "png"])
+    uploaded_image = st.file_uploader("Upload your own screenshot", type=["jpg", "jpeg", "png"])
 
     if uploaded_image:
         img = Image.open(uploaded_image).convert("RGB")
@@ -233,7 +233,7 @@ with st.expander("Fake X/IG profile detection"):
         "IG Profile 03": "sample_images/Screenshot 2568-05-27 at 17.03.27.png",
     }
 
-    sample_choice = st.selectbox("Choose a sample", list(sample_dict.keys()))
+    sample_choice = st.selectbox("#### Choose a sample", list(sample_dict.keys()))
     sample_path = sample_dict[sample_choice]
     st.image(sample_path, caption=sample_choice, use_container_width=True)
 
