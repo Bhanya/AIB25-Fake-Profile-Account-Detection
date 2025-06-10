@@ -26,7 +26,7 @@
 ```
 
 Note:
-- โมเดลที่ใช่ในโปรเจ็กต์ Fake X/IG profile detection มีขนาดไฟล์ที่ใหญ่เกินไปทำให้ต้อง upload ไว้ใน google drive แทน
+- โมเดลที่ใช้ใน project Fake X/IG profile detection มีขนาดไฟล์ที่ใหญ่เกินไปทำให้ต้อง upload ไว้ใน google drive แทน
   - Model trained on X screenshot: https://drive.google.com/file/d/1fJoH544qIINdmrO3KPTUb9TJQKntVZGE/view?usp=sharing
   - Model fine tuned on IG screenshot: https://drive.google.com/file/d/15jb5frBeVffjp0NNCdHg2NXWvTTSDqpV/view?usp=sharing
 
