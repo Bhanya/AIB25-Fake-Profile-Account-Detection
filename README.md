@@ -3,7 +3,10 @@
 ```
 ├── Datasets/
 │   ├── Instagram_fake_profile_dataset.csv # Tabular Dataset used in Fake/bot Instagram account detection
-│   ├── 
+│   ├── bot
+│   │   ├── ...
+│   ├── real
+│   │   ├── ...
 │   └── Sample_from_real_ig_accounts.csv # IG account sample collected manually (100 sample)
 │
 ├── Notebooks/
