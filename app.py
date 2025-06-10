@@ -200,7 +200,7 @@ with st.expander("Fake X/IG profile detection"):
             overlay = np.clip(overlay, 0, 1)
 
         st.success(f"**Predicted Class: {label} (Confidence: {confidence:.2%})**")
-        st.markdown("#### 🔍 Grad-CAM Heatmap")
+        st.markdown("#### Grad-CAM Heatmap")
         st.image(overlay, use_container_width=True)
 
     sample_dict = {
