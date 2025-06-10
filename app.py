@@ -8,6 +8,14 @@ import io
 import torch
 import torch.nn as nn
 from torchvision import models, transforms
+import os
+import gdown
+
+# ---------------- Helper Function ---------------- #
+def download_from_drive(file_id, output_path):
+    if not os.path.exists(output_path):
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, output_path, quiet=False)
 
 # ---------------- Streamlit Page Setup ---------------- #
 st.set_page_config(page_title="AI Builders 2025: Fake Social Media Detector", layout="centered")
@@ -103,18 +111,32 @@ X_image = Image.open('sample_images/Screenshot 2568-06-04 at 18.55.34.png')
 
 @st.cache_resource
 def load_resnet_model(model_type):
-    model = models.resnet18(pretrained=False)
+    os.makedirs("model", exist_ok=True)
+
     if model_type == "Detect X profile":
+        model_path = "model/best_resnet18_model.pth"
+        file_id = "1fJoH544qIINdmrO3KPTUb9TJQKntVZGE"
+        download_from_drive(file_id, model_path)
+
+        model = models.resnet18(pretrained=False)
         model.fc = nn.Linear(model.fc.in_features, 3)
-        model.load_state_dict(torch.load("model/best_resnet18_model.pth", map_location=torch.device("cpu")))
+        model.load_state_dict(torch.load(model_path, map_location=torch.device("cpu")))
         idx_to_class = {0: "Bot", 1: "Real", 2: "Cyborg"}
+
     elif model_type == "Detect Instagram profile":
+        model_path = "model/best_resnet18_model_ig.pth"
+        file_id = "15jb5frBeVffjp0NNCdHg2NXWvTTSDqpV"
+        download_from_drive(file_id, model_path)
+
+        model = models.resnet18(pretrained=False)
         model.fc = nn.Linear(model.fc.in_features, 3)
-        model.load_state_dict(torch.load("model/best_resnet18_model_ig.pth", map_location=torch.device("cpu")))
+        model.load_state_dict(torch.load(model_path, map_location=torch.device("cpu")))
         idx_to_class = {0: "Bot", 1: "Real"}
+
     model.eval()
     return model, idx_to_class
 
+# ------------- GradCAM and Inference Section ------------- #
 def generate_gradcam_heatmap(model, input_tensor, target_class=None):
     activations = {}
     gradients = {}
@@ -169,7 +191,6 @@ with st.expander("Fake X/IG profile detection"):
     st.warning("The Instagram profile detector is trained on a small dataset (60 samples) with limited variety. Predictions may not be fully accurate yet.")
 
     model_type = st.selectbox("Option", ["Detect X profile", "Detect Instagram profile"])
-
     uploaded_image = st.file_uploader("Or upload your own screenshot", type=["jpg", "jpeg", "png"])
 
     if uploaded_image:
