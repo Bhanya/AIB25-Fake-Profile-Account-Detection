@@ -233,7 +233,8 @@ with st.expander("Fake X/IG profile detection"):
         "IG Profile 03": "sample_images/Screenshot 2568-05-27 at 17.03.27.png",
     }
 
-    sample_choice = st.selectbox("#### Choose a sample", list(sample_dict.keys()))
+    st.markdown("#### Choose a sample")
+    sample_choice = st.selectbox("", list(sample_dict.keys()))
     sample_path = sample_dict[sample_choice]
     st.image(sample_path, caption=sample_choice, use_container_width=True)
 
