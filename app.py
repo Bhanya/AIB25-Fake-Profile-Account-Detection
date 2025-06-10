@@ -238,7 +238,7 @@ with st.expander("Fake X/IG profile detection"):
     sample_path = sample_dict[sample_choice]
     st.image(sample_path, caption=sample_choice, use_container_width=True)
 
-    if st.button("Use this sample image"):
+    if st.button("Predict this sample image"):
         img = Image.open(sample_path).convert("RGB")
 
         transform = transforms.Compose([
